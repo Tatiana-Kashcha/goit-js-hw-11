@@ -12,11 +12,16 @@ body {
   line-height: 1.5;
 }
 
-#search-box {
-  font: inherit;
-  padding: 8px;
-  max-width: 320px;
-  margin-bottom: 16px;
+/* Стилі для розмітки */
+.search-form {
+  background-color: #5e6cbb;
+  padding: 10px, 0;
+  text-align: center;
 }
 
-/* Стилі для розмітки */
+.load-more {
+  background-color: #5e6cbb;
+  color: #ffff;
+  text-transform: uppercase;
+  padding: 10px;
+}
