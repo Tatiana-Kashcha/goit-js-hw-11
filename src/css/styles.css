@@ -69,6 +69,17 @@ body {
   margin-top: 10px;
 }
 
+.info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 /* Стилі для кнопки завантаження */
 .load-more-btn {
   display: flex;
