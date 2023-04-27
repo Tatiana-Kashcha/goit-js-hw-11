@@ -8,6 +8,7 @@ const API_KEY = '35802971-9f205e77cee7d2465290329c6';
 const BASE_URL = 'https://pixabay.com/api/';
 const axios = require('axios').default;
 const formEl = document.querySelector('#search-form');
+const galleryItemsEl = document.querySelector('.gallery');
 let nameImages = '';
 
 formEl.addEventListener('submit', onSubmit);
@@ -29,27 +30,49 @@ async function getImages() {
   }
 }
 
-/**
- * Рендерить розмітку в залежності від результатів пошуку
- * @param {*} evt
- */
 function onSubmit(evt) {
   evt.preventDefault();
   const {
     elements: { searchQuery },
   } = evt.currentTarget;
+
   nameImages = searchQuery.value;
-  console.log(nameImages);
+
   if (nameImages === '') {
     return;
   }
 
-  getImages();
+  getImages()
+    .then(data => {
+      console.log(data); //для перевірки
+      galleryItemsEl.insertAdjacentHTML('beforeend', createMarkup(data));
+    })
+    .catch(error => {
+      Notify.failure('Oops');
+    });
+}
 
-  // .then(data => {
-  //   console.log(data); //для перевірки
-  // })
-  // .catch(error => {
-  //   Notify.failure('Oops');
-  // });
+function createMarkup(arr) {
+  return arr
+    .map(
+      ({ webformatURL, tags, likes, views, comments, downloads }) =>
+        `<div class="photo-card">
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        <div class="info">
+            <p class="info-item">
+            <b>Likes</b>:${likes}
+            </p>
+            <p class="info-item">
+            <b>Views</b>:${views}
+            </p>
+            <p class="info-item">
+            <b>Comments</b>:${comments}
+            </p>
+            <p class="info-item">:${downloads}
+            <b>Downloads</b>
+            </p>
+        </div>
+     </div>`
+    )
+    .join('');
 }
