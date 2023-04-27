@@ -50,6 +50,11 @@ body {
   text-align: center;
 }
 
+.search-btn:hover,
+.search-btn:focus {
+  background-color: #dcdce4;
+}
+
 .icon {
   fill: currentColor;
   width: 18px;
