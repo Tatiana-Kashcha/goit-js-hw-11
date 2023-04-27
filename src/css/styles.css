@@ -12,7 +12,7 @@ body {
   line-height: 1.5;
 }
 
-/* Стилі для розмітки */
+/* Стилі для форми */
 .search-form {
   background-color: #5e6cbb;
   height: 35px;
@@ -61,6 +61,9 @@ body {
   height: 18px;
 }
 
+/* Стилі для галереї */
+
+/* Стилі для кнопки завантаження */
 .load-more-btn {
   display: flex;
   justify-content: center;
