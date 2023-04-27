@@ -25,12 +25,13 @@ async function getImages() {
       },
     });
     console.log(response);
+    return response;
   } catch (error) {
     console.error(error);
   }
 }
 
-function onSubmit(evt) {
+async function onSubmit(evt) {
   evt.preventDefault();
   const {
     elements: { searchQuery },
@@ -42,14 +43,13 @@ function onSubmit(evt) {
     return;
   }
 
-  getImages()
-    .then(data => {
-      console.log(data); //для перевірки
-      galleryItemsEl.insertAdjacentHTML('beforeend', createMarkup(data));
-    })
-    .catch(error => {
-      Notify.failure('Oops');
-    });
+  try {
+    const data = await getImages();
+    console.log(data); //для перевірки
+    galleryItemsEl.insertAdjacentHTML('beforeend', createMarkup(data));
+  } catch (error) {
+    Notify.failure('Oops');
+  }
 }
 
 function createMarkup(arr) {
