@@ -61,9 +61,15 @@ body {
   height: 18px;
 }
 
+.load-more-btn {
+  display: flex;
+  justify-content: center;
+}
+
 .load-more {
   background-color: #5e6cbb;
   color: #ffff;
   text-transform: uppercase;
   padding: 10px;
+  border-radius: 4px;
 }
