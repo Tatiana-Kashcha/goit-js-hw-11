@@ -44,9 +44,12 @@ async function onSubmit(evt) {
   }
 
   try {
-    const data = await getImages();
-    console.log(data); //для перевірки
-    galleryItemsEl.insertAdjacentHTML('beforeend', createMarkup(data));
+    const dataGallery = await getImages();
+    console.log(dataGallery.data.hits); //для перевірки
+    galleryItemsEl.insertAdjacentHTML(
+      'beforeend',
+      createMarkup(dataGallery.data.hits)
+    );
   } catch (error) {
     Notify.failure('Oops');
   }
@@ -60,16 +63,16 @@ function createMarkup(arr) {
         <img src="${webformatURL}" alt="${tags}" loading="lazy" />
         <div class="info">
             <p class="info-item">
-            <b>Likes</b>:${likes}
+            <b>Likes</b>${likes}
             </p>
             <p class="info-item">
-            <b>Views</b>:${views}
+            <b>Views</b>${views}
             </p>
             <p class="info-item">
-            <b>Comments</b>:${comments}
+            <b>Comments</b>${comments}
             </p>
-            <p class="info-item">:${downloads}
-            <b>Downloads</b>
+            <p class="info-item">
+            <b>Downloads</b>${downloads}
             </p>
         </div>
      </div>`
