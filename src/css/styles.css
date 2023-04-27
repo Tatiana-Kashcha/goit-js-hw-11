@@ -62,11 +62,18 @@ body {
 }
 
 /* Стилі для галереї */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
 
 /* Стилі для кнопки завантаження */
 .load-more-btn {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .load-more {
