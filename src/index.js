@@ -68,9 +68,13 @@ function createMarkup(arr) {
         downloads,
       }) =>
         `<div class="photo-card">
+            
             <div class="thumb-img">
-                <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
+                <a class="gallery-link" href=${largeImageURL}>
+                    <img class="gallery-image" src=${webformatURL} alt="${tags}" loading="lazy"/>
+                </a>
             </div>
+            
             <div class="info">
                 <p class="info-item">
                 <b>Likes</b>${likes}
@@ -89,3 +93,8 @@ function createMarkup(arr) {
     )
     .join('');
 }
+
+const galleryLightBox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
