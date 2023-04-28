@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const API_KEY = '35802971-9f205e77cee7d2465290329c6';
 const BASE_URL = 'https://pixabay.com/api/';
-const axios = require('axios').default;
+// const axios = require('axios').default;
 const formEl = document.querySelector('#search-form');
 const galleryItemsEl = document.querySelector('.gallery');
 let nameImages = '';
