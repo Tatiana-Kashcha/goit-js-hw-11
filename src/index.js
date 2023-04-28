@@ -58,7 +58,15 @@ async function onSubmit(evt) {
 function createMarkup(arr) {
   return arr
     .map(
-      ({ webformatURL, tags, likes, views, comments, downloads }) =>
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) =>
         `<div class="photo-card">
             <div class="thumb-img">
                 <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
