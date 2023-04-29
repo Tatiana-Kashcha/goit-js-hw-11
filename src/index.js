@@ -2,37 +2,23 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import './css/styles.css';
-import axios from 'axios';
+import { getImages } from './getImages';
 
-const API_KEY = '35802971-9f205e77cee7d2465290329c6';
-const BASE_URL = 'https://pixabay.com/api/';
 const formEl = document.querySelector('#search-form');
 const galleryItemsEl = document.querySelector('.gallery');
 let nameImages = '';
+
+export { nameImages };
 
 formEl.addEventListener('submit', onSubmit);
 
 const galleryLightBox = new SimpleLightbox('.gallery a');
 
-async function getImages() {
-  try {
-    const response = await axios.get(BASE_URL, {
-      params: {
-        key: API_KEY,
-        q: nameImages,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        per_page: 40,
-      },
-    });
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
+/**
+ * Рендерить розмітку в залежності від результатів пошуку
+ * @param {*} evt
+ * @returns
+ */
 async function onSubmit(evt) {
   evt.preventDefault();
   const {
@@ -58,6 +44,11 @@ async function onSubmit(evt) {
   }
 }
 
+/**
+ * Створює розмітку галереї за вхідними параметрами
+ * @param {*} arr масив об'єктів
+ * @returns розмітку для рендеру
+ */
 function createMarkup(arr) {
   return arr
     .map(
