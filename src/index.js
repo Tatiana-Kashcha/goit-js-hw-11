@@ -34,11 +34,17 @@ async function onSubmit(evt) {
   try {
     const dataGallery = await getImages();
     console.log(dataGallery.data.hits); //для перевірки
+    console.log(dataGallery.data.hits.length); //для перевірки
     galleryItemsEl.insertAdjacentHTML(
       'beforeend',
       createMarkup(dataGallery.data.hits)
     );
     galleryLightBox.refresh();
+    if (dataGallery.data.hits.length === 0) {
+      Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+    }
   } catch (error) {
     Notify.failure('Oops');
   }
