@@ -5,6 +5,7 @@ import './css/styles.css';
 import { getImages } from './getImages';
 
 const formEl = document.querySelector('#search-form');
+const inputEl = document.querySelector('#search-form input');
 const galleryItemsEl = document.querySelector('.gallery');
 let nameImages = '';
 
@@ -40,18 +41,27 @@ async function onSubmit(evt) {
       createMarkup(dataGallery.data.hits)
     );
     galleryLightBox.refresh();
-    Notify.success(`Hooray! We found ${dataGallery.data.totalHits} images.`);
 
-    if (dataGallery.data.hits.length === 0) {
+    if (dataGallery.data.hits.length) {
+      Notify.success(`Hooray! We found ${dataGallery.data.totalHits} images.`);
+    } else {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      galleryItemsEl.innerHTML = '';
     }
   } catch (error) {
     Notify.failure('Oops');
     galleryItemsEl.innerHTML = '';
   }
 }
+
+/** Очищаємо розмітку при очістці інпута */
+inputEl.addEventListener('input', event => {
+  if (inputEl.value === '') {
+    galleryItemsEl.innerHTML = '';
+  }
+});
 
 /**
  * Створює розмітку галереї за вхідними параметрами
