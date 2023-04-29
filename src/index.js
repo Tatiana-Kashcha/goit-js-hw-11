@@ -40,6 +40,8 @@ async function onSubmit(evt) {
       createMarkup(dataGallery.data.hits)
     );
     galleryLightBox.refresh();
+    Notify.success(`Hooray! We found ${dataGallery.data.totalHits} images.`);
+
     if (dataGallery.data.hits.length === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -47,6 +49,7 @@ async function onSubmit(evt) {
     }
   } catch (error) {
     Notify.failure('Oops');
+    galleryItemsEl.innerHTML = '';
   }
 }
 
