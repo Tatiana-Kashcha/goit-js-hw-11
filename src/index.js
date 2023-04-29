@@ -56,7 +56,7 @@ async function onSubmit(evt) {
   }
 }
 
-/** Очищаємо розмітку при очістці інпута */
+/** Очищаємо розмітку при очистці інпута */
 inputEl.addEventListener('input', event => {
   if (inputEl.value === '') {
     galleryItemsEl.innerHTML = '';
