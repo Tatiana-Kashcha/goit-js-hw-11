@@ -3,6 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import './css/styles.css';
 import { getImages } from './getImages';
+import { createMarkup } from './createMarkup';
 
 const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-form input');
@@ -62,47 +63,3 @@ inputEl.addEventListener('input', event => {
     galleryItemsEl.innerHTML = '';
   }
 });
-
-/**
- * Створює розмітку галереї за вхідними параметрами
- * @param {*} arr масив об'єктів
- * @returns розмітку для рендеру
- */
-function createMarkup(arr) {
-  return arr
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) =>
-        `<div class="photo-card">
-            
-            <div class="thumb-img">
-                <a class="gallery-link" href=${largeImageURL}>
-                    <img class="gallery-image" src=${webformatURL} alt="${tags}" loading="lazy"/>
-                </a>
-            </div>
-            
-            <div class="info">
-                <p class="info-item">
-                <b>Likes</b>${likes}
-                </p>
-                <p class="info-item">
-                <b>Views</b>${views}
-                </p>
-                <p class="info-item">
-                <b>Comments</b>${comments}
-                </p>
-                <p class="info-item">
-                <b>Downloads</b>${downloads}
-                </p>
-            </div>
-        </div>`
-    )
-    .join('');
-}
