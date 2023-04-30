@@ -21,7 +21,7 @@ async function getImages() {
         per_page: 40,
       },
     });
-    console.log(response); //для перевірки
+    // console.log(response); //для перевірки
     return response;
   } catch (error) {
     console.error(error);

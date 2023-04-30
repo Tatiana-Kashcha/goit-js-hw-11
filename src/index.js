@@ -8,11 +8,14 @@ import { createMarkup } from './createMarkup';
 const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-form input');
 const galleryItemsEl = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('.load-more');
 let nameImages = '';
+let currentPage = 1;
 
 export { nameImages };
 
 formEl.addEventListener('submit', onSubmit);
+loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
 
 const galleryLightBox = new SimpleLightbox('.gallery a');
 
@@ -36,8 +39,8 @@ async function onSubmit(evt) {
 
   try {
     const dataGallery = await getImages();
-    console.log(dataGallery.data.hits); //для перевірки
-    console.log(dataGallery.data.hits.length); //для перевірки
+    // console.log(dataGallery.data.hits); //для перевірки
+    // console.log(dataGallery.data.hits.length); //для перевірки
     galleryItemsEl.insertAdjacentHTML(
       'beforeend',
       createMarkup(dataGallery.data.hits)
@@ -53,7 +56,7 @@ async function onSubmit(evt) {
       galleryItemsEl.innerHTML = '';
     }
   } catch (error) {
-    Notify.failure('Oops');
+    console.error(error);
     galleryItemsEl.innerHTML = '';
   }
 }
@@ -64,3 +67,7 @@ inputEl.addEventListener('input', event => {
     galleryItemsEl.innerHTML = '';
   }
 });
+
+function onClickLoadMoreBtn() {
+  currentPage += 1;
+}
