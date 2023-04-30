@@ -27,9 +27,10 @@ async function onSubmit(evt) {
     elements: { searchQuery },
   } = evt.currentTarget;
 
-  nameImages = searchQuery.value;
+  nameImages = searchQuery.value.trim();
 
   if (nameImages === '') {
+    evt.currentTarget.reset();
     return;
   }
 
@@ -59,8 +60,7 @@ async function onSubmit(evt) {
 
 /** Очищаємо розмітку при очистці інпута */
 inputEl.addEventListener('input', event => {
-  if (inputEl.value === '') {
+  if (event.currentTarget.value === '') {
     galleryItemsEl.innerHTML = '';
   }
 });
-//-------
