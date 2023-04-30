@@ -63,3 +63,4 @@ inputEl.addEventListener('input', event => {
     galleryItemsEl.innerHTML = '';
   }
 });
+//-------
