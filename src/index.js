@@ -78,7 +78,7 @@ async function onSubmit(evt) {
   }
 }
 
-/** Очищає розмітку при очистці інпута та прибирає кнопку пагінації*/
+/** Очищає розмітку при очистці інпута та ховає кнопку пагінації*/
 inputEl.addEventListener('input', event => {
   if (event.currentTarget.value === '') {
     galleryItemsEl.innerHTML = '';
@@ -87,12 +87,15 @@ inputEl.addEventListener('input', event => {
 });
 
 /**
- * Ініціює пагінацію галереї карток
+ * Вмконує пагінацію галереї карток
  */
 async function onClickLoadMoreBtn() {
   currentPage += 1;
   if (currentPage === totalPage) {
     loadMoreBtn.hidden = true;
+    Notify.failure(
+      'We/re sorry, but you/ve reached the end of search results.'
+    );
   }
   try {
     const dataGalleryPagination = await getImages();
