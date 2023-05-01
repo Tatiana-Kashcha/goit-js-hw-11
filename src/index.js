@@ -12,6 +12,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 let nameImages = '';
 let currentPage = 1;
 let totalPage = 0;
+let perPage = 0;
 
 export { nameImages };
 export { currentPage };
@@ -60,12 +61,12 @@ async function onSubmit(evt) {
     totalPage =
       Math.ceil(dataGallery.data.totalHits / dataGallery.data.hits.length) ||
       'Сторінки відсутні';
+    perPage = dataGallery.data.hits.length;
+
     console.log(`Номер сторінки: ${currentPage}`);
     console.log(`Загальна кількість сторінок: ${totalPage}`);
-    console.log(
-      `Кількість карток на сторінці: ${dataGallery.data.hits.length}`
-    );
-    console.log(totalPage > currentPage);
+    console.log(`Кількість карток на сторінці: ${perPage}`);
+    console.log(totalPage > currentPage); //для перевірки
 
     if (totalPage > currentPage) {
       loadMoreBtn.hidden = false;
@@ -85,11 +86,29 @@ inputEl.addEventListener('input', event => {
   }
 });
 
+/**
+ * Ініціює пагінацію галереї карток
+ */
 async function onClickLoadMoreBtn() {
   currentPage += 1;
   if (currentPage === totalPage) {
     loadMoreBtn.hidden = true;
   }
   try {
-  } catch (error) {}
+    const dataGalleryPagination = await getImages();
+    galleryItemsEl.insertAdjacentHTML(
+      'beforeend',
+      createMarkup(dataGalleryPagination.data.hits)
+    );
+    galleryLightBox.refresh();
+    perPage = dataGalleryPagination.data.hits.length;
+
+    console.log(`Номер сторінки: ${currentPage}`);
+    console.log(`Загальна кількість сторінок: ${totalPage}`);
+    console.log(`Кількість карток на сторінці: ${perPage}`);
+  } catch (error) {
+    console.error(error);
+    galleryItemsEl.innerHTML = '';
+    loadMoreBtn.hidden = true;
+  }
 }
