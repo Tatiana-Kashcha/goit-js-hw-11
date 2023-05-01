@@ -11,8 +11,10 @@ const galleryItemsEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 let nameImages = '';
 let currentPage = 1;
+let totalPage = 0;
 
 export { nameImages };
+export { currentPage };
 
 formEl.addEventListener('submit', onSubmit);
 loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
@@ -40,7 +42,6 @@ async function onSubmit(evt) {
   try {
     const dataGallery = await getImages();
     // console.log(dataGallery.data.hits); //для перевірки
-    // console.log(dataGallery.data.hits.length); //для перевірки
     galleryItemsEl.insertAdjacentHTML(
       'beforeend',
       createMarkup(dataGallery.data.hits)
@@ -55,19 +56,40 @@ async function onSubmit(evt) {
       );
       galleryItemsEl.innerHTML = '';
     }
+
+    totalPage =
+      Math.ceil(dataGallery.data.totalHits / dataGallery.data.hits.length) ||
+      'Сторінки відсутні';
+    console.log(`Номер сторінки: ${currentPage}`);
+    console.log(`Загальна кількість сторінок: ${totalPage}`);
+    console.log(
+      `Кількість карток на сторінці: ${dataGallery.data.hits.length}`
+    );
+    console.log(totalPage > currentPage);
+
+    if (totalPage > currentPage) {
+      loadMoreBtn.hidden = false;
+    }
   } catch (error) {
     console.error(error);
     galleryItemsEl.innerHTML = '';
+    loadMoreBtn.hidden = true;
   }
 }
 
-/** Очищаємо розмітку при очистці інпута */
+/** Очищає розмітку при очистці інпута та прибирає кнопку пагінації*/
 inputEl.addEventListener('input', event => {
   if (event.currentTarget.value === '') {
     galleryItemsEl.innerHTML = '';
+    loadMoreBtn.hidden = true;
   }
 });
 
-function onClickLoadMoreBtn() {
+async function onClickLoadMoreBtn() {
   currentPage += 1;
+  if (currentPage === totalPage) {
+    loadMoreBtn.hidden = true;
+  }
+  try {
+  } catch (error) {}
 }

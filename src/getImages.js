@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { nameImages } from './index';
+import { nameImages, currentPage } from './index';
 
 const API_KEY = '35802971-9f205e77cee7d2465290329c6';
 const BASE_URL = 'https://pixabay.com/api/';
@@ -19,6 +19,7 @@ async function getImages() {
         orientation: 'horizontal',
         safesearch: true,
         per_page: 40,
+        page: currentPage,
       },
     });
     // console.log(response); //для перевірки
