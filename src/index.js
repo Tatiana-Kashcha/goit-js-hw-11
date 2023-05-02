@@ -89,7 +89,7 @@ inputEl.addEventListener('input', event => {
 });
 
 /**
- * Вмконує пагінацію галереї карток
+ * Виконує пагінацію галереї карток
  */
 async function onClickLoadMoreBtn() {
   currentPage += 1;
