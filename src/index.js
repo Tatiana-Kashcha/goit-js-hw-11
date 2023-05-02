@@ -34,6 +34,8 @@ async function onSubmit(evt) {
   } = evt.currentTarget;
 
   nameImages = searchQuery.value.trim();
+  currentPage = 1;
+  loadMoreBtn.hidden = true;
 
   if (nameImages === '') {
     evt.currentTarget.reset();
@@ -43,10 +45,7 @@ async function onSubmit(evt) {
   try {
     const dataGallery = await getImages();
     // console.log(dataGallery.data.hits); //для перевірки
-    galleryItemsEl.insertAdjacentHTML(
-      'beforeend',
-      createMarkup(dataGallery.data.hits)
-    );
+    galleryItemsEl.innerHTML = createMarkup(dataGallery.data.hits);
     galleryLightBox.refresh();
 
     if (dataGallery.data.hits.length) {
@@ -56,6 +55,7 @@ async function onSubmit(evt) {
         'Sorry, there are no images matching your search query. Please try again.'
       );
       galleryItemsEl.innerHTML = '';
+      loadMoreBtn.hidden = true;
     }
 
     totalPage =
