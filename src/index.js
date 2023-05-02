@@ -75,6 +75,7 @@ async function onSubmit(evt) {
     console.error(error);
     galleryItemsEl.innerHTML = '';
     loadMoreBtn.hidden = true;
+    currentPage = 1;
   }
 }
 
@@ -83,6 +84,7 @@ inputEl.addEventListener('input', event => {
   if (event.currentTarget.value === '') {
     galleryItemsEl.innerHTML = '';
     loadMoreBtn.hidden = true;
+    currentPage = 1;
   }
 });
 
@@ -114,5 +116,6 @@ async function onClickLoadMoreBtn() {
     console.error(error);
     galleryItemsEl.innerHTML = '';
     loadMoreBtn.hidden = true;
+    currentPage = 1;
   }
 }
